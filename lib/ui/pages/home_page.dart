@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
     _taskController.getTask();
   }
 
@@ -76,7 +77,6 @@ class _HomePageState extends State<HomePage> {
             children: [
               _TaskBar(),
               _DateBar(),
-              //_NoTask(),
               _ShowTask(),
             ],
           ),
@@ -151,6 +151,7 @@ class _HomePageState extends State<HomePage> {
   _ShowTask() {
     return Container(
       child: Obx(() {
+        _taskController.getTask();
         if (_taskController.taskList.isEmpty) {
           return _NoTask();
           // return Stack(
@@ -246,7 +247,7 @@ class _HomePageState extends State<HomePage> {
       required Color clr,
       bool isClose = true}) {
     return GestureDetector(
-      onTap: () => Get.back(),
+      onTap: onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 4),
         height: 65,
@@ -302,7 +303,7 @@ class _HomePageState extends State<HomePage> {
                     _taskController.deleteTask(task);
                     Get.back();
                   },
-                  clr: primaryClr),
+                  clr: Colors.red),
               Divider(
                 thickness: 1,
                 color: Colors.grey,
